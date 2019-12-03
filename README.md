@@ -46,10 +46,6 @@ needed to run the code in this package.
     pip install -r requirements.txt
     ```
 
-5.  Install the required SpaCy data pack.
-    ```
-    python -m spacy download en
-    ```
     
 ## Usage
 
@@ -70,8 +66,8 @@ Gigaword data files to [`flatten_one_gigaword.py`](./flatten_one_gigaword.py) an
 For example, you can run:
 
 ```
-./flatten_all_gigaword.sh ./data/gigaword_eng_5/ tmp/ 24
+./flatten_all_gigaword.sh ./data/cmn_gw_5/ tmp/ 24
 ```
 
 to extract data (in parallel, processing 24 files at a time) from the Gigaword corpus 
-at `./data/gigaword_eng_5/` and write the flattened files + combined output to `tmp/`. 
+at `./data/cmn_gw_5/` and write the flattened files + combined output to `tmp/`. 

@@ -1,16 +1,14 @@
 import logging
 import os
 import re
-import spacy
 
 from argparse import ArgumentParser
 from bs4 import BeautifulSoup
 
-en_nlp = spacy.load("en")
-
 
 def flatten_one_gigaword_file(file_path):
     # Parse the text with BeautifulSoup
+    print(file_path)
     soup = BeautifulSoup(open(file_path), "html.parser")
 
     # Iterate over all <p> items and get the text for each.
@@ -19,17 +17,11 @@ def flatten_one_gigaword_file(file_path):
         # Turn inter-paragraph newlines into spaces
         paragraph = paragraph.get_text()
         paragraph = re.sub(r"\n+", "\n", paragraph)
-        paragraph = paragraph.replace("\n", " ")
-        # Tokenize the paragraph into words
-        tokens = en_nlp.tokenizer(paragraph)
-        words = [str(token) for token in tokens if not
-                 str(token).isspace()]
-        if len(words) < 3:
-            continue
-        all_paragraphs.append(words)
+        paragraph = paragraph.replace("\n", "")
+        all_paragraphs.append(paragraph.strip())
     # Return a list of strings, where each string is a
     # space-tokenized paragraph.
-    return [" ".join(paragraph) for paragraph in all_paragraphs]
+    return all_paragraphs
 
 
 if __name__ == "__main__":
